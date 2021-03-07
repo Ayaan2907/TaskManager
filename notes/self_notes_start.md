@@ -170,6 +170,9 @@ ________________________________________________________________________________
 |--|--|
 | its a local unique identifier for everyrow of a table | this is an id or a key word which relates the local/primary key with some other id of any other table |
 
+> in order to describe one to many relation we use foreign keys. Its syntax is
+`    extra_column_of_current_table = models.ForeignKey(name_of_another_table, on_delete=models.CASCADE)`
+
 ## Interracting with sql without sqlite terminal using django models
 
 In models.py by defining a class we can control sql queries 
