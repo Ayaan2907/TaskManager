@@ -5,11 +5,33 @@ home.html
 {% endblock%}
 
 {% block body %}
-    {% for list in Lists %}
+<h1>ADD NEW LIST HERE</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="title">NAME
+        <input type="text" name="title" id="" autofocus>
+    </label>
+    <label for="note">note
+        <input type="text" name="note" id="" >
+    </label>
+    <input type="submit" value="creat">
+</form>   
+
+{% for list in Lists %}
     
     <h1>{{list.id}}</h1>
     <h1>{{list.title}}</h1>
     <p>{{list.note}}</p>
     {% endfor %}
 
+
+
+
+    {#
+        ################################
+        #
+        #   SEE THE CURRENT COMMIT MWAAAGE
+        #
+        ################################    
+    #}
 {% endblock%}

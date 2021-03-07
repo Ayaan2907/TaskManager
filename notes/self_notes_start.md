@@ -303,6 +303,25 @@ ran_var.save()
 
 return redirect('index_page')
 ```
+this one was from my recent example
+```
+in >> views.py
+
+def creat_new_list(request):
+    
+    if request.method == 'POST':
+
+      # getting the data and storing it in the db taskList table
+        list_name = request.POST['list_name']
+        list_descr = request.POST['list_descr']
+         # FIXME: :FIXED >> in below line i was providing the local variable representing the table here but we have to assign values to the actual table name 
+         # used in line 5 here table_actual_name.objects.all()
+        new_list = taskList(name = list_name , descr = list_descr )
+        new_list.save()
+        return redirect('index')
+    else:    
+        return render(request, 'tasks_app_templates/newList.html' )
+```
 
 **now this was the general method**
 ## Django forms
