@@ -1,9 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import *
 
-# home= {'dic1':'dic', 'dic2':'dic2'}
+Lists = Lists.objects.all()  
+Task = Task.objects.all()
+
 def index(request):
     return HttpResponse("Hello")
 
 def home(request):
-    return render(request, "trelloAppTemplates/home.html",{'home': 1234567890})
+    return render(request, "trelloAppTemplates/home.html")
+
+def model(request):
+    return render(request, "trelloAppTemplates/lists.html", {'Lists': Lists })
+

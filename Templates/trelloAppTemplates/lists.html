@@ -1,0 +1,15 @@
+{% extends "trelloAppTemplates/base.html" %}
+
+{% block title %}
+home.html
+{% endblock%}
+
+{% block body %}
+    {% for list in Lists %}
+    
+    <h1>{{list.id}}</h1>
+    <h1>{{list.title}}</h1>
+    <p>{{list.note}}</p>
+    {% endfor %}
+
+{% endblock%}
