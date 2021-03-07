@@ -16,7 +16,6 @@ class Task(models.Model):
     task_description = models.TextField(max_length= 200)
     time_stamp = models.DateTimeField(default=timezone.now())
     due_date = models.DateTimeField()
-
-    # list 
+    list_key = models.ForeignKey(Lists, on_delete=models.CASCADE)
     def __str__(self):
         return(f"{self.name}")
