@@ -7,6 +7,49 @@ hello
 
 {% block body %}
 
-<p> <a href="{% url 'model' %}">lists</a>
+<p> <a href="{% url 'creat_list' %}">lists</a>
+    <a href="{% url 'creat_task' %}">tasks</a>
+
 </p>
+
+
+
+
+<h2>lists</h2>
+<table> 
+    {% for list in Lists %}
+    <tr>
+            <th>  id</th>
+            <td>  {{list.id}}</td>
+            <th>  title</th>
+            <td>  {{list.title}}</td>
+            <th>  note</th>
+            <td>  {{list.note}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+<h2>Tasks</h2>
+<table>
+    {% for task in Tasks %}
+        <tr>
+                <th>  id</th>
+                <td>  {{task.id}}</td>
+                <th>  title</th>
+                <td>  {{task.name}}</td>
+                <th>  description</th>
+                <td>  {{task.task_description}}</td>
+                <th>  time_stamp</th>
+                <td>  {{task.time_stamp}}</td>
+                <th>  due_date</th>
+                <td>  {{task.due_date}}</td>
+                <th>  list_key</th>
+                <td>  {{task.list_key}}</td>
+            </tr>
+            {% endfor %}
+    
+
+</table>
+        
+
+
 {% endblock%}
