@@ -5,18 +5,11 @@ home.html
 {% endblock%}
 
 {% block body %}
-<h1>ADD NEW LIST HERE</h1>
+<h1>ADD NEW TASK HERE</h1>
 <form action="" method="post">
     {% csrf_token %}
-    
-    <label for="title">NAME
-        <input type="text" name="title" id="" autofocus>
-    </label>
-    <label for="note">note
-        <input type="text" name="note" id="" >
-    </label>
+    {{form.as_p}}
     <input type="submit" value="creat">
-    
 
 </form>   
 

@@ -278,7 +278,8 @@ Django provides general scripts whcih identifies the difference in old schema an
 
 
 # Django forms
-
+>note irrelevent to heading  while entering datetime values consider this `Exception Value:	
+>["'2021-03-02-12-00' value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format."]` as this `.uuuuuu...` enter `00000`
 ## Requesting data from data base in views.py to render
 - For this >> `from .models import *`
 - Then simply assign it to dictionaries or lists as we weere doing earlier
@@ -330,3 +331,37 @@ using {{form}} form object that django provides us
 - in the app just create forms.py
 - from `django.forms import forms`
 - like we defined all classes of table in models here we can define a class with the fields we need which inherits the `forms.Form` class
+- similar to models we have to define all the feilds we need in our database
+- in the template `form.html` just provide a variable  `{{form}}` inside table tag
+- now in `views.py` do `from .forms import *`
+- then in `creat_function` 
+```
+Form = TABLE_CLASS_NAME
+```
+then in context provide `{'form ' : Form}`
+
+> NOTE : we have defined all our fields in models, in order to interract with forms earlier we were doing something like this
+```
+class Task_form_old(forms.Form):
+    name = forms.CharField(label='Your name')#,max_length = 20)
+    task_description = forms.CharField( widget= forms.Textarea , label='Your name')
+    due_date = forms.DateTimeField()
+```
+but now and in order to display every field in its correct format we just can do like this >> *our `forms.py` should be like this*
+```
+from django import forms
+from .models import *
+
+class Task_form(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = '__all__'
+        <!-- or here u can provide the name of fields as well -->
+        fields = ['name', 'date' 'etc']
+```
+#this magic dunder all method displayes everything provided in the above model as Task which reflect to the Task class in models.py
+- now in order to further organise our input fields we can provide **widgets**
+```
+        widgets = {'due_date': forms.DateTimeInput(attrs={"type":"datetime-local"})}
+        #  the above line is providing a right look to date time feild
+```
