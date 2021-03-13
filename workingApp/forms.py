@@ -2,7 +2,7 @@ from django import forms
 from workingApp.models import *
 
 # form to get list data 
-   class Task_list_form(forms.Form):
+class Task_list_form(forms.Form):
   # name = forms.CharField(max_length=50)
   # note = forms.TextInput()
   # # created_at = forms.DateTimeField(default=timezone.now())
