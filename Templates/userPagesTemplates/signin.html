@@ -4,5 +4,10 @@
 signin
 {% endblock%}
 {% block content %}
-signin
+<h1>signin</h1>
+<p><label for="username"><input type="text" name="username"></label></p>
+<p><label for="password"><input type="password" name="password"></label></p>
+{% for message in messages %}
+{{message}}
+{% endfor %}
 {% endblock%}
