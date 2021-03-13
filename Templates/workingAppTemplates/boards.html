@@ -1,0 +1,30 @@
+{% extends "workingAppTemplates/base.html" %}
+
+{% block extra_title %}
+ Board
+{% endblock %}
+
+{% block heading %}
+Board: {{ board_name }}
+{% endblock %}
+
+{% block content %}
+<button>
+  <a href="{% url 'create_list_form' board_id %}">
+    Create New List
+  </a>
+</button>
+
+{% for list in lists %}
+<h2 title="{{list.note}}">
+  {{list.id}}.
+    <a href="{% url 'list_descr' list.id %}">
+     {{ list.name }}
+  </a>
+</h2>
+<h3> Created :{{list.created_at}}</h3> 
+{# <h3>{{list.note}}</h3>#} 
+{% endfor %}
+{% endblock %}
+{# boards displayes all lists inside that board #}
+
