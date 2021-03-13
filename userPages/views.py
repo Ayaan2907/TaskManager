@@ -38,3 +38,6 @@ def signin(request):
             messages.error(request, "invalid login details")
     return render(request, 'userPagesTemplates/signin.html')
 
+def signout(request):
+    logout(request)
+    return redirect('signin')
