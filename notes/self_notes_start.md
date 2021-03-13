@@ -367,3 +367,93 @@ class Task_form(forms.ModelForm):
 
 ```
 
+# User Authentication
+
+## Key Points
+- django auth
+- user table in db
+- login/ logout/ register pages/ forms
+- Personalised dashboard
+- restrict dashboard to logged in users
+
+## Learnings and steps invovled
+>**The best practice to impliment user_auth another app should be used to make it global and reusuable**
+
+- creating new app userPages and do all necessary initial steps
+- now in `views.py` of `userPages` do `from django.contrib.auth.forms import UserCreationForm` (*TRY AND EXPLORE OTHERS AS WELL*)
+- then in `views.py` 
+### signup form
+ ```
+ def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(data= request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sigin')
+    else:    
+        form = UserCreationForm()
+    return render(request, 'userPagesTemplates/signup.html', {'form_data':form})
+#  in case of is_valid()== false this should return to the same page of signup thats why we are returning outside the else.
+```
+>* providing the code to avoid much description(understand by looking the example code)*
+> here by using this `UserCreationForm` email field is not displayed so
+- in order to customize the form creat `forms.py`
+- use form class inheritence. we will inherit `UserCreationForm` into our customeform
+- then generate the form as earlier and add desired fields
+- now there in order to link it with the `model form` using `ORM`
+do `import django.contrib.auth.models import User` and `from django.contrib.auth.forms import UserCreationForm `
+then assign `model = User`
+- then in `views.py` do ` from .forms import * `
+-  change `form = UserCreationForm` to `form = signupForm`
+
+### Signin form
+- form for getting uesrname, password
+- check if user exists in db using `django authenticate` from `django.contrib.auth authenticate`
+- if yes, pass the user details with ecery request using `login `method `django.contrib.auth login`
+- ***imports needed in `views.py` for signin form***
+```
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .forms import *
+```
+> note : currently the signup form was made in basic html and will be upgraded to djangoForms soon
+```
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        # user exists :: ?
+        user = authenticate(request, username=username, password= password )
+        if user is not None:
+        # login
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            # showing message on invalid credentials
+            messages.error(request, "invalid login details")
+    return render(request, 'userPagesTemplates/signin.html')
+```
+> - ***make urls for these pages***
+
+### Signout form
+- add a url tag in anchor tag in the template
+- assign a url pattern for that url_tag_name
+- call the `signout` function in `views.py` 
+- in `views.py` `from django.contrib.auth import logout`
+- then 
+```
+def signout(request):
+    logout(request)
+    return redirect('signin') 
+```
+_________________________________________________________________
+_________________________________________________________________
+_________________________________________________________________
+## my personal file structure
+(means what am i thinking to connect)
+`homePage` >> shows basic info of app and sigIn/signUp button >> 
+`signIn/signUp` form page >> 
+after login  >> 
+`dashboard` on dashboard all the `boards` will be there >>  select board see  `lists `inside it >> select list see ` tasks` inside it 
+
