@@ -4,7 +4,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'), #show all boards
+    # path('', views.index, name='index'), #show all boards
 
     path('board/<int:board_id>', views.board_descr, name= 'board_descr'),     #show lists in a board
     path('list/<int:list_id>', views.list_descr, name= 'list_descr'),     #show tasks in a list
