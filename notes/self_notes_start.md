@@ -484,3 +484,12 @@ after login  >>
 - creat heroku app `heroku create`
 - set heroku config variables do `heroku config : set DJANGO_SECRET_KEY = "SECRET_KEY"`(u can manually do it using gui)
 - now pushing to heroku use 
+- now to attatch database we have to makemigrations and migrate it
+- to run commands on server do `heroku run python3 manage.py makemigrsations` then same migrate
+then do the following in `settings.py` in order to connect `heroku-postgresql` databse
+```
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+```
