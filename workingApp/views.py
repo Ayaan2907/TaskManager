@@ -16,7 +16,7 @@ def create_list_form(request):
         if form.is_valid():
             form.save()
             return redirect('dashboard')
-    else:
+    else:   
         form = Task_list_form()
     return render(request,'workingAppTemplates/formsTemplate/createList.html',{'form_data': form} )
 

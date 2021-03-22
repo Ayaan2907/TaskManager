@@ -15,7 +15,7 @@ class Task_list_form(forms.ModelForm):
   class Meta:
     model = Task_list
     # fields = '__all__'
-    fields = ['name', 'note']
+    fields = ['name', 'note', 'user_key']
     # fields = ['name', 'note', 'board_key']
 
 
