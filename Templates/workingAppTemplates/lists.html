@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block heading %}
-List: {{ list_name }}
+{{ list_name }}
 {% endblock %}
 
 {% block content %}
@@ -29,7 +29,7 @@ List: {{ list_name }}
     Created : {{task.created_at}}
   </p>
   <p>
-    Due Date: {{ task.due_date }}
+   {# Task status :{{ task.task_status }} #}
   </p>
 </li>
 {% endfor %}

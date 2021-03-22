@@ -8,7 +8,10 @@
 </head>
 <body>
   <div>
-    <h3>welcome {{request.user}} <a href="{% url 'signout' %}">signout</a></h3>
+    <h3>welcome {{request.user}} 
+    <br>Want <a href="{% url 'dashboard' %}">dashboard</a> <br> Or  
+    <a href="{% url 'signout' %}">signout</a> ?
+    </h3>
     <h1> {% block heading %}  {% endblock %}  </h1>
     {% block content %}  {% endblock %}
   </div>

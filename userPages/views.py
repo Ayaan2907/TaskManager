@@ -12,11 +12,11 @@ from workingApp.models import *
 def dashboard(request): 
     # boards = List_board.objects.all()
     user = request.user
-    board = List_board.objects.all() 
-    return render(request, 'workingAppTemplates/dashboard.html', {'boards':board})
+    list = Task_list.objects.filter(user_key = user) 
+    return render(request, 'workingAppTemplates/dashboard.html', {'lists':list})
 
-def home(request): # used for a new comer for login/signup or to reaad about our app
-    return render(request, 'userPagesTemplates/home.html')
+def index(request): # used for a new comer for login/signup or to reaad about our app
+    return render(request, 'userPagesTemplates/index.html')
 def signup(request):
     if request.method == 'POST':
         # form = UserCreationForm(data= request.POST)
@@ -48,4 +48,4 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    return redirect('home')
+    return redirect('index')

@@ -8,17 +8,17 @@ from .models import *
 #     boards = List_board.objects.all()
 #     return render(request, 'workingAppTemplates/index.html', {'boards':boards})
 
-def create_list_form(request, board_id):
+def create_list_form(request):
     # get data from form and assign it
     if request.method == 'POST':
         form = Task_list_form(data= request.POST)
-        # name = request.POST['name']
-        # if form.is_valid():
-        form.save()
-        return redirect('board_descr', board_id)
+        name = request.POST['name']
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
     else:
-        form = Task_list_form(initial= {'board_key': board_id})
-        return render(request,'workingAppTemplates/formsTemplate/createList.html',{'form_data': form} )
+        form = Task_list_form()
+    return render(request,'workingAppTemplates/formsTemplate/createList.html',{'form_data': form} )
 
 
 def create_task_form(request, list_id):
@@ -35,12 +35,12 @@ def create_task_form(request, list_id):
 
 
 
-def board_descr(request, board_id):
-    boards = List_board.objects.filter(id=board_id)
-    user= request.user
-    lists = Task_list.objects.filter(board_key= board_id)
-    return render(request, 'workingAppTemplates/boards.html', {'lists': lists, 'board_name': boards[0].name, 'board_id': boards[0].id})
-    # FIXME: why is it taking like boards[0].name 
+# def board_descr(request, board_id):
+#     boards = List_board.objects.filter(id=board_id)
+#     user= request.user
+#     lists = Task_list.objects.filter(board_key= board_id)
+#     return render(request, 'workingAppTemplates/boards.html', {'lists': lists, 'board_name': boards[0].name, 'board_id': boards[0].id})
+#     # FIXME: why is it taking like boards[0].name 
     
 
 def list_descr(request, list_id):

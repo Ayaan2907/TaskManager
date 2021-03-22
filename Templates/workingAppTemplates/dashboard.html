@@ -1,22 +1,28 @@
 {% extends "workingAppTemplates/base.html" %}
 
 {% block extra_title %}
- Boards
+ Board
 {% endblock %}
 
 {% block heading %}
-DASHBOARD | All Boards
+lists
 {% endblock %}
 
 {% block content %}
+<button>
+  <a href="{% url 'create_list_form' %}">
+    Create New List
+  </a>
+</button>
 
-{% for board in boards %}
-<h2>
-    {{board.id}}.
-     <a href= " {% url 'board_descr' board.id %} "> 
-    {{ board.name }}
+{% for list in lists %}
+<h2 title="{{list.note}}">
+  {{list.id}}.
+    <a href="{% url 'list_descr' list.id %}">
+     {{ list.name }}
   </a>
 </h2>
+<h3> Created :{{list.created_at}}</h3> 
+{# <h3>{{list.note}}</h3>#} 
 {% endfor %}
 {% endblock %}
-{# index displayes all boards #}
