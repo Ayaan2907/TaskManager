@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 
@@ -7,7 +8,7 @@ from .models import *
 # def index(request):
 #     boards = List_board.objects.all()
 #     return render(request, 'workingAppTemplates/index.html', {'boards':boards})
-
+@login_required(login_url='signin')
 def create_list_form(request):
     # get data from form and assign it
     if request.method == 'POST':
@@ -20,7 +21,7 @@ def create_list_form(request):
         form = Task_list_form()
     return render(request,'workingAppTemplates/formsTemplate/createList.html',{'form_data': form} )
 
-
+@login_required(login_url='signin')
 def create_task_form(request, list_id):
     # get data from form and assign it
     if request.method == 'POST':
@@ -42,7 +43,7 @@ def create_task_form(request, list_id):
 #     return render(request, 'workingAppTemplates/boards.html', {'lists': lists, 'board_name': boards[0].name, 'board_id': boards[0].id})
 #     # FIXME: why is it taking like boards[0].name 
     
-
+@login_required(login_url='signin')
 def list_descr(request, list_id):
     lists = Task_list.objects.filter(id=list_id)
     tasks = Task.objects.filter(list_key=list_id)

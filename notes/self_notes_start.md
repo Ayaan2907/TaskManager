@@ -447,7 +447,12 @@ def signout(request):
     logout(request)
     return redirect('signin') 
 ```
-_________________________________________________________________
+
+## decorators
+used to check some given condition to display the views. If condition passes display view else got to provided url.
+first in `views.py `do `from django.contrib.auth.decorators import login_required`
+then in our case `@login_required(login_url='signin')`
+_add this line befoe the view function________________________________________________________________
 _________________________________________________________________
 _________________________________________________________________
 ## my personal file structure
