@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-     <h1>welcome {{request.user}}</h1>   
-     <a href="{% url 'signout' %}">signout</a>
+<body> 
+    <a href="{% url 'signin' %}">signin</a>
+    <a href="{% url 'signup' %}">signup</a>
+    <h1>welcome to our TaskManager application</h1>
+</body>
 </body>
 </html>

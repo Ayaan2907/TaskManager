@@ -342,7 +342,7 @@ then in context provide `{'form ' : Form}`
 
 > NOTE : we have defined all our fields in models, in order to interract with forms earlier we were doing something like this
 ```
-class Task_form_old(forms.Form):
+class Task_form_old(forms.ModelForm):
     name = forms.CharField(label='Your name')#,max_length = 20)
     task_description = forms.CharField( widget= forms.Textarea , label='Your name')
     due_date = forms.DateTimeField()
