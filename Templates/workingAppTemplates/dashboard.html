@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block heading %}
-Board: {{ board_name }}
+lists
 {% endblock %}
 
 {% block content %}
 <button>
-  <a href="{% url 'create_list_form' board_id %}">
+  <a href="{% url 'create_list_form' %}">
     Create New List
   </a>
 </button>
@@ -26,5 +26,3 @@ Board: {{ board_name }}
 {# <h3>{{list.note}}</h3>#} 
 {% endfor %}
 {% endblock %}
-{# boards displayes all lists inside that board #}
-
