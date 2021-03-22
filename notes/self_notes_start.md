@@ -481,3 +481,6 @@ after login  >>
 - to run heroku server a `procfile` will be needed
     - stores all commannds to start or end the server
     - make `procfile` and do `web: gunicorn TaskManager.wsgi` and late rsee twhat is it doing
+- creat heroku app `heroku create`
+- set heroku config variables do `heroku config : set DJANGO_SECRET_KEY = "SECRET_KEY"`(u can manually do it using gui)
+- now pushing to heroku use 
