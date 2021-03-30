@@ -10,10 +10,12 @@
     </title>
 </head>
 <body>
-    <form action="" method="POST">
+    {% block content %}
+    {# content only heading and other urls, main content is inside forms below#}
+    {% endblock %}
+    <form action="" method="POST" >
         {% csrf_token %}
-        {% block content %}
-        {% endblock %}
+        {{ form.as_p }}
         <p><input type="submit" name="submit" value="proceed" /></p>
     </form></body>
 </html>
