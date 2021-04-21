@@ -1,4 +1,4 @@
-{% extends "workingAppTemplates/base.html" %}
+{% extends "workingApp/base.html" %}
 
 
 {% block extra_title %}
@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block heading %}
-{{ list_name }}
+{{ list_name }} 
 {% endblock %}
 
 {% block content %}
 <button>
-  <a href="{% url 'create_task_form' list_id %}">
-    Create New Task
+  <a href="{% url 'create_task_form' listId %}">
+    &#x2b;
   </a>
 </button>
 
@@ -29,7 +29,7 @@
     Created : {{task.created_at}}
   </p>
   <p>
-   {# Task status :{{ task.task_status }} #}
+   {# Task status :{{ task.completionStatus }} #}
   </p>
 </li>
 {% endfor %}
@@ -39,4 +39,4 @@
 
 
 
-{# lists displayes all tasks inside that list#}
+{# lists displayes all tasks inside that list #}

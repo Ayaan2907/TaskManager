@@ -435,6 +435,7 @@ def signin(request):
     return render(request, 'userPagesTemplates/signin.html')
 ```
 > - ***make urls for these pages***
+>NOTE: pk django, <int:pk> here pk is short for primary key, which is a unique identifier for each record in a database.
 
 ### Signout form
 - add a url tag in anchor tag in the template

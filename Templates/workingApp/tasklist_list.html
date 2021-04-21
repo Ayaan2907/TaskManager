@@ -1,0 +1,20 @@
+{% extends "workingApp/base.html" %}
+{# this is dashboard template displaying all lists #}
+
+{% block extra_title %}
+ List
+{% endblock %}
+
+{% block heading %}
+  lists
+{% endblock %}
+
+{% block content %}
+<button><a href="{% url 'create_list_form' %}">Add &#x2b;</a></button>
+
+{% for list in lists %}
+<h2><a href="{% url 'list_descr' list.id %}">{{ list.id}} >>{{ list.name }}</a></h2>
+{% empty %}
+<h5>Empty</h5>
+{% endfor %}  
+{% endblock %}

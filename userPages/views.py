@@ -11,16 +11,9 @@ from .forms import *
 from workingApp.forms import *
 from workingApp.models import *
 
-# this dashboard is renamed from index and cut from the workingApp/ views.py 
-@login_required(login_url='signin')
-def dashboard(request): 
-    # boards = List_board.objects.all()
-    user = request.user
-    list = Task_list.objects.filter(user_key = user) 
-    return render(request, 'workingAppTemplates/dashboard.html', {'lists':list})
-
 def index(request): # used for a new comer for login/signup or to reaad about our app
     return render(request, 'userPagesTemplates/index.html')
+
 # not using user creation form or class based view here in order to practice fun based view
 def signup(request):
     if request.method == 'POST':
