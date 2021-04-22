@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TaskManager | {% block title %} {% endblock %} </title>
+  <title>TaskManager | {% block formTitle %} {% endblock %} </title>
 </head>
 <body>
   <div>
-    <h1>{% block form_heading %} {% endblock %} </h1>
+    <a href="{% url 'dashboard' %}">HOME</a>
+    <h1>{% block formHeading %} {% endblock %} </h1>
     <form action="" method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" name="submit" value="{% block submit_title %} {% endblock %}" />
+      <input type="submit" name="submit" value="{% block submitTitle %} {% endblock %}" />
     </form>
+    {% block formExtra %} {% endblock %}
   </div>
 </body>
 </html>

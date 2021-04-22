@@ -7,6 +7,7 @@ class TaskList(models.Model):
 	name = models.CharField(max_length=50)
 	desc = models.TextField(null=True, blank=True)
 	created_at = models.DateTimeField(default=timezone.now) # if we write default = timezone.now() the timezone function gets called and it takes the time when the migrations are run.  instead use timezone.now which gets called at the object creation
+	deadline = models.DateField(default=timezone.now) # if we write default = timezone.now() the timezone function gets called and it takes the time when the migrations are run.  instead use timezone.now which gets called at the object creation
 	completionStatus = models.BooleanField(default=False)
 	userKey = models.ForeignKey(User, on_delete= models.CASCADE,  null=True, blank=True)#storing user_id
 	def __str__(self):

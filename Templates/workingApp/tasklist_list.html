@@ -1,21 +1,23 @@
 {% extends "workingApp/base.html" %}
-{# this is dashboard template displaying all lists #}
+{# this is dashboard template displaying all tasks #}
 
 {% block extra_title %}
- lists
+ tasks
 {% endblock %}
 
 {% block heading %}
-  lists
+  tasks
 {% endblock %}
 
 {% block content %}
-<button><a href="{% url 'create_list_form' %}">Add &#x2b;</a></button>
-
-{% for list in lists %}
-<h2><a href="{% url 'list_descr' list.id %}">{{ list.id}} > {{ list.name }}</a></h2>
-<a href="{% url 'delete_list' list.id %}">delete</a>
+<form method="GET" style="display: flex;">
+  <input type='text' name='search-area' value="{{searchInput}}" placeholder="search your task">
+  <input class="button" type="submit" value='Search'>
+</form>
+{% for task in tasks %} 
+<h2><a href="{% url 'list_descr' task.id %}">{{ task.name }}</a></h2>
+{# <a href="{% url 'delete_list' task.id %}">delete</a> #}
 {% empty %}
-<h5>Empty</h5>
+<h4>Nothing</h4>
 {% endfor %}  
 {% endblock %}

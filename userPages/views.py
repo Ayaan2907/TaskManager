@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView as signinView
 from .forms import *
-from workingApp.forms import *
+
 from workingApp.models import *
 
 def index(request): # used for a new comer for login/signup or to reaad about our app

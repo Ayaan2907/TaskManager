@@ -1,10 +1,16 @@
 {% extends "workingApp/formsBase.html" %}
 
-{% block title %} 
+{% block formTitle %} 
 confirm
 {% endblock %}
 
-{% block form_heading %} 
-        Confirm delete {{lists}} or <a href="{% url 'dashboard' %}">&#8592;Go Back</a>
-    {% endblock %}
-    {% block submit_title %} delete{% endblock %}
+{% block formHeading %} 
+Confirm delete {{tasks}} ? 
+{% endblock %}
+{% block submitTitle %} 
+Delete
+{% endblock %}    
+{% block formExtra %}
+<button><a href="{% url 'dashboard' %}">Cancel</a></button> 
+{% endblock %}
+    
