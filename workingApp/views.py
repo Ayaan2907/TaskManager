@@ -1,50 +1,57 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .forms import *
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from .models import *
 
-# iits no longer needed here. the index related part is moved to UaerPages/views.py in order to filter the user related data from the pages app itself
-# def index(request):
-#     boards = List_board.objects.all()
-#     return render(request, 'workingAppTemplates/index.html', {'boards':boards})
+class dashboard(LoginRequiredMixin, ListView):
+    model = TaskList
+    context_object_name = 'tasks' # this is used as providing the context in template
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(userKey=self.request.user)
+        # context['tasks'] = context['tasks'].filter(completionStatus=False).count()
+
+        searchInput = self.request.GET.get('search-area') or ''
+        if searchInput:
+            # context['tasks'] = context['tasks'].filter(
+            #         desc__contains=searchInput )
+            context['tasks'] = context['tasks'].filter(
+                    name__startswith=searchInput)
+        context['searchInput'] = searchInput
+        return context
+
+
+class taskCreate(LoginRequiredMixin, CreateView):
+    model = TaskList
+    fields = ['name', 'desc', 'completionStatus','deadline']
+    success_url = reverse_lazy('dashboard')
+
+    def form_valid(self, form):
+        form.instance.userKey = self.request.user
+        return super(taskCreate, self).form_valid(form)
+
+
 @login_required(login_url='signin')
-def create_list_form(request):
-    # get data from form and assign it
-    if request.method == 'POST':
-        form = Task_list_form(data= request.POST)
-        name = request.POST['name']
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-    else:   
-        form = Task_list_form()
-    return render(request,'workingAppTemplates/formsTemplate/createList.html',{'form_data': form} )
-
-@login_required(login_url='signin')
-def create_task_form(request, list_id):
-    # get data from form and assign it
-    if request.method == 'POST':
-        form = Task_form(data=request.POST)
-        name = request.POST['name']
-        if form.is_valid():
-            form.save()
-            return redirect('list_descr', list_id)
-    else:
-        form = Task_form(initial= {'list_key': list_id})
-    return render(request,'workingAppTemplates/formsTemplate/createTask.html', {'form_data':form})
+def taskDescription(request, taskId):
+    tasks = TaskList.objects.filter(id=taskId)
+    return render(request, 'workingApp/tasks.html', {'tasks':tasks,'taskId':tasks[0].id,'taskName':tasks[0].name, 'deadline': tasks[0].deadline, 'stat': tasks[0].completionStatus})
 
 
+class taskUpdate(LoginRequiredMixin, UpdateView):
+    model = TaskList
+    fields = ['name', 'desc', 'completionStatus','deadline']
+    success_url = reverse_lazy('dashboard')
 
-# def board_descr(request, board_id):
-#     boards = List_board.objects.filter(id=board_id)
-#     user= request.user
-#     lists = Task_list.objects.filter(board_key= board_id)
-#     return render(request, 'workingAppTemplates/boards.html', {'lists': lists, 'board_name': boards[0].name, 'board_id': boards[0].id})
-#     # FIXME: why is it taking like boards[0].name 
-    
-@login_required(login_url='signin')
-def list_descr(request, list_id):
-    lists = Task_list.objects.filter(id=list_id)
-    tasks = Task.objects.filter(list_key=list_id)
-    return render(request, 'workingAppTemplates/lists.html', {'tasks': tasks, 'list_name': lists[0].name, 'list_id': lists[0].id})
+
+class taskDelete(LoginRequiredMixin, DeleteView):
+    model = TaskList
+    context_object_name = 'tasks'
+    success_url = reverse_lazy('dashboard')
+
+

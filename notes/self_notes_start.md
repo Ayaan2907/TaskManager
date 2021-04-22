@@ -208,6 +208,12 @@ class table_name(models.Model):
 - now to run do `python3 manage.py migrate`
  > by this in data base the tables will be created u can check using `.schema tables` in `sqlite` shell
 
+checking the sql query fired using python code
+`example
+name = table_name.objects.all()
+name.query.__str__()`
+it will give all the queries 
+ 
 
 ## inserting data into tables created using models
 - for this we can use the django provided shell
@@ -435,6 +441,7 @@ def signin(request):
     return render(request, 'userPagesTemplates/signin.html')
 ```
 > - ***make urls for these pages***
+>NOTE: pk django, <int:pk> here pk is short for primary key, which is a unique identifier for each record in a database.
 
 ### Signout form
 - add a url tag in anchor tag in the template

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+#!/home/aanoo/scalerWorkspace/dev1/django1/TaskManager/my_env/bin/python3
+=======
 #!/home/ayaankaif/Desktop/scalerWorkspace/dev1/django1/TaskManager/my_env/bin/python3
+>>>>>>> main
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
