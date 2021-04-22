@@ -3,20 +3,13 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 # from workingApp.views import index
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView as signinView
 from .forms import *
 
-# this dashboard is renamed from index and cut from the workingApp/ views.py 
-@login_required(login_url='signin')
-def dashboard(request): 
-    # boards = List_board.objects.all()
-    user = request.user
-    list = Task_list.objects.filter(user_key = user) 
-    return render(request, 'workingAppTemplates/dashboard.html', {'lists':list})
+from workingApp.models import *
 
 def index(request): # used for a new comer for login/signup or to reaad about our app
     return render(request, 'userPagesTemplates/index.html')

@@ -469,34 +469,5 @@ _________________________________________________________________
 after login  >> 
 `dashboard` on dashboard all the `boards` will be there >>  select board see  `lists `inside it >> select list see ` tasks` inside it 
 
-# Deployment
-- install heroku CLI
--`heroku login`
-- do the following changes to deploy
-    - in `settings.py`
-        - hide secret security key
-        - `SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')` 
-        - set debug to false
-        - `DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'`
-        - set `ALLOWED_HOSTS = ['*']` * means we can access the page using any url
-- provide `requirement.txt` file to store alll requiremnts
-- activate virtual environment [refer](https://www.digitalocean.com/community/tutorials/how-to-install-the-django-web-framework-on-ubuntu-18-04)
-- now install the requirements
-- `pip freeze` tells us what is currrently installed
-- then install django inside venv `pip install django`
-- then install gunicorn inside venv `pip install gunicorn` get to know about it later
-- to run heroku server a `procfile` will be needed
-    - stores all commannds to start or end the server
-    - make `procfile` and do `web: gunicorn TaskManager.wsgi` and late rsee twhat is it doing
-- creat heroku app `heroku create`
-- set heroku config variables do `heroku config : set DJANGO_SECRET_KEY = "SECRET_KEY"`(u can manually do it using gui)
-- now pushing to heroku use 
-- now to attatch database we have to makemigrations and migrate it
-- to run commands on server do `heroku run python3 manage.py makemigrsations` then same migrate
-then do the following in `settings.py` in order to connect `heroku-postgresql` databse
-```
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-```
+
+# using class based views
