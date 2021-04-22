@@ -2,7 +2,7 @@
 {# this is dashboard template displaying all lists #}
 
 {% block extra_title %}
- List
+ lists
 {% endblock %}
 
 {% block heading %}
@@ -13,7 +13,8 @@
 <button><a href="{% url 'create_list_form' %}">Add &#x2b;</a></button>
 
 {% for list in lists %}
-<h2><a href="{% url 'list_descr' list.id %}">{{ list.id}} >>{{ list.name }}</a></h2>
+<h2><a href="{% url 'list_descr' list.id %}">{{ list.id}} > {{ list.name }}</a></h2>
+<a href="{% url 'delete_list' list.id %}">delete</a>
 {% empty %}
 <h5>Empty</h5>
 {% endfor %}  

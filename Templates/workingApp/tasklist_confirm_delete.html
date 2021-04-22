@@ -1,0 +1,10 @@
+{% extends "workingApp/formsBase.html" %}
+
+{% block title %} 
+confirm
+{% endblock %}
+
+{% block form_heading %} 
+        Confirm delete {{lists}} or <a href="{% url 'dashboard' %}">&#8592;Go Back</a>
+    {% endblock %}
+    {% block submit_title %} delete{% endblock %}

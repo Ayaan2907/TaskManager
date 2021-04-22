@@ -20,12 +20,12 @@ class Task_list_form(forms.ModelForm):
 
 
 # form to get task data
-class Task_form(forms.ModelForm):
+# class Task_form(forms.ModelForm):
 	# due_date = forms.DateField(widget=AdminDateWidget())
-	class Meta:
-		model = Task
+	# class Meta:
+		# model = Task
 		# fields = ['name', 'desc', due_date, 'list_key']
-		fields = ['name', 'desc', 'listKey']
+		# fields = ['name', 'desc', 'listKey']
 		# fields = ['name', 'desc', 'due_date', 'list_key']
 		# widgets = {'due_date': forms.DateInput()}
     # fields = '__all__'

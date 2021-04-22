@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .forms import *
+# from .forms import *
 from .models import *
 
 
@@ -17,7 +17,7 @@ class dashboard(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['lists'] = context['lists'].filter(userKey=self.request.user)
-#         context['count'] = context``['lists'].filter(complete=False).count()
+        # context['lists'] = context['lists'].filter(completionStatus=False).count()
 
 #         search_input = self.request.GET.get('search-area') or ''
 #         if search_input:
@@ -31,43 +31,63 @@ class dashboard(LoginRequiredMixin, ListView):
 
 class createList(LoginRequiredMixin, CreateView):
     model = TaskList
-    fields = ['name']
+    fields = ['name', 'desc', 'completionStatus']
     success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         form.instance.userKey = self.request.user
         return super(createList, self).form_valid(form)
 
-class createTask(LoginRequiredMixin, CreateView):
-    model = Task
-    fields = ['name', 'desc', 'listKey','completionStatus']
-    success_url = reverse_lazy('list_descr(request, listId)')
 
-    def form_valid(self, form):
-        # form.instance.listKey = self.kwargs.get('listId')
-        return super(createTask, self).form_valid(form)
-
-    #FIXME: 1>> success_url = redirect('list_desc', 'listId')
-    #FIXME: 2>> listKey
+class updateList(LoginRequiredMixin, UpdateView):
+    model = TaskList
+    fields = ['name', 'desc', 'completionStatus']
+    success_url = reverse_lazy('dashboard')
 
 
+class DeleteList(LoginRequiredMixin, DeleteView):
+    model = TaskList
+    context_object_name = 'lists'
+    success_url = reverse_lazy('dashboard')
 
-# @login_required(login_url='signin')
-# def create_task_form(request, list_id):
-#     # get data from form and assign it
-#     if request.method == 'POST':
-#         form = Task_form(data=request.POST)
-#         name = request.POST['name']
-#         if form.is_valid():
-#             form.save()
-#             return redirect('list_descr', list_id)
-#     else:
-#         form = Task_form(initial= {'list_key': list_id})
-#     return render(request,'workingApp/createTask.html', {'form':form})
+
+
+
 
 @login_required(login_url='signin')
 def list_descr(request, listId):
     lists = TaskList.objects.filter(id=listId)
-    tasks = Task.objects.filter(listKey=listId)
-    return render(request, 'workingApp/lists.html', {'tasks': tasks, 'list_name': lists[0].name, 'listId': lists[0].id})
+    # tasks = Task.objects.filter(listKey=listId)
+    # return render(request, 'workingApp/lists.html', {'tasks': tasks, 'list_name': lists[0].name, 'listId': lists[0].id})
+    return render(request, 'workingApp/lists.html', {'lists':lists,'listId':lists[0].id,'listName':lists[0].name, 'stat': lists[0].completionStatus})
+
+
+
+{
+    # class createTask(LoginRequiredMixin, CreateView):
+    #     model = Task
+    #     fields = ['name', 'desc', 'listKey','completionStatus']
+    #     success_url = reverse_lazy(list_descr(request, listId))
+    #     #FIXME: 1>> success_url = redirect('list_desc', 'listId')
+    #     #FIXME: 2>> listKey
+
+    #     def form_valid(self, form):
+    #         # form.instance.listKey = self.kwargs.get('listId')
+    #         return super(createTask, self).form_valid(form)
+
+
+    # # @login_required(login_url='signin')
+    # # def create_task_form(request, list_id):
+    # #     # get data from form and assign it
+    # #     if request.method == 'POST':
+    # #         form = Task_form(data=request.POST)
+    # #         name = request.POST['name']
+    # #         if form.is_valid():
+    # #             form.save()
+    # #             return redirect('list_descr', list_id)
+    # #     else:
+    # #         form = Task_form(initial= {'list_key': list_id})
+    # #     return render(request,'workingApp/createTask.html', {'form':form})
+}
+
 
