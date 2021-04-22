@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "python.pythonPath": "/home/ayaankaif/Desktop/scalerWorkspace/dev1/django1/TaskManager/my_env/bin/python3"
 }
