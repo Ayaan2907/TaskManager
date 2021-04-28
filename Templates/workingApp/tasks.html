@@ -1,17 +1,14 @@
 {% extends "workingApp/base.html" %}
+{% load markdown_deux_tags %}
 {% block extra_title %} Tasks {% endblock%}
 {% block heading %} {{ taskName }} {% endblock %} 
 {% block content %}
 <button><a href="{% url 'update_list' taskId %}">update</a></button>
 <button><a href="{% url 'delete_list' taskId %}">delete</a></button>
-<ul>
   {% for task in tasks %}
-  <li>
-    <h3>Description:{{ task.desc }}</h3>
-    <p>Deadline : {{task.deadline}}</p>
-    <p>Task status : {% if stat is True %} Completed {% else %} Incomplete {% endif %}</p>
-    <p>Created : {{task.created_at}}</p>
-  </li>
+<p>Description:{{ task.desc |markdown }}</p> 
+<br><p>Deadline : {{task.deadline}}</p>
+<p>Task status : {% if stat is True %} Completed {% else %} Incomplete {% endif %}</p>
+<p>Created : {{task.created_at}}</p>
   {% endfor %}
-</ul>
 {% endblock %}
