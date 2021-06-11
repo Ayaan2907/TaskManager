@@ -1,3 +1,3 @@
 # TaskManager 
-> refrence code from [Sahil Sir](https://github.com/sahilbansal11/django_todo_app)
-# **README not updated will be documented soon!**
+# Check on [Heroku](https://django-project-ayaan.herokuapp.com/) 
+## **README not updated, will be documented soon!**
