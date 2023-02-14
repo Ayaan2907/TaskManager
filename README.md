@@ -1,6 +1,8 @@
 # TaskManager 
 A simple task manager web application built using Django.
 
+Live [Demo](https://orca-app-6ell3.ondigitalocean.app/)
+
 ## Description
 ### Features
 - This is a simple task manager web application built using Django. 
@@ -18,7 +20,7 @@ A simple task manager web application built using Django.
 
 ## Steps to run 
 1. Clone the repository
-2. Activate the virtual environment ` source venv/bin/activate `
+2. Activate the virtual environment ` source my_env/bin/activate `
 3. Install the requirements ` pip3 install -r requirements.txt `
 4. Toggle the environmental changes' commits in settings.py
 5. Run the server ` python3 manage.py runserver `
@@ -27,3 +29,4 @@ A simple task manager web application built using Django.
 
 
 > Note: This was hosted on Heroku earlier, but because of termination of their free tier plans, alternatives to be explored.
+Digital Ocean : https://orca-app-6ell3.ondigitalocean.app/
